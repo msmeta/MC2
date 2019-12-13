@@ -1,0 +1,28 @@
+% halton from wikipedia
+clear
+v=[];
+% bases 3,5,7 leap 13
+tic
+for j=1:1000
+v(j,1)=halton(j*13,3);
+v(j,2)=halton(j*13,5);
+v(j,3)=halton(j*13,7);
+end
+toc
+plot3(v(:,1),v(:,2),v(:,3),'.');
+
+%%
+halton(14,3)
+%%
+function h = halton(x,b)
+f=1; r=0; i=x;
+while(i>0)
+    % decimal in base b
+    f=f/b
+    % rest is modulus multiplied by f
+    r=r+f*(mod(i,b))
+    % divide and discard the rest
+    i=floor(i/b)
+end
+h=r;
+end
