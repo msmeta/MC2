@@ -10,7 +10,7 @@ localdiscrepancy(S,B(1,:))
 approxstardisc(S,B)
 %%
 function D = approxstardisc(S,B)
-% handle multiple rows in B
+% handle multiple rows in B, localdiscrepancy takes one row at a time
 [i,d]=size(B);
 % create a vector of local discrepancies
 discrepancies=[];
@@ -27,6 +27,8 @@ function l = localdiscrepancy(S,B)
 % (only considering the sets B as cubes)
 [n,d]=size(S);
 % find the elements of S inside the cube B
+% a point of S is in B if its values are lower in each column
+% finds rows where d columns of S have lower values than B
 ind=find(sum(S<B,2)==d);
 % the number of elements of S inside B
 r=length(ind);
